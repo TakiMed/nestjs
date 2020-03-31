@@ -5,29 +5,50 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const product_models_1 = require("./product.models");
 const common_1 = require("@nestjs/common");
+const mongoose_1 = require("@nestjs/mongoose");
+const mongoose_2 = require("mongoose");
 let ProductsService = class ProductsService {
-    constructor() {
+    constructor(productModel) {
+        this.productModel = productModel;
         this.products = [];
     }
-    insertProduct(title, desc, price, quantity) {
+    async insertProduct(title, desc, price, quantity) {
         const prodId = Math.random().toString();
-        const newProduct = new product_models_1.Product(prodId, title, desc, price, quantity);
-        this.products.push(newProduct);
-        return prodId;
+        const newProduct = new this.productModel({
+            title,
+            description: desc,
+            price,
+            quantity
+        });
+        const result = await newProduct.save();
+        return result.id;
     }
-    getProducts() {
-        return [...this.products];
+    async getProducts() {
+        const products = await this.productModel.find().exec();
+        return products.map((prod) => ({ id: prod.id,
+            title: prod.title,
+            description: prod.description,
+            price: prod.price,
+            quantity: prod.quantity }));
     }
-    getSingleProduct(prodId) {
-        const product = this.findProduct(prodId)[0];
-        return Object.assign({}, product);
+    async getSingleProduct(prodId) {
+        const product = await this.findProduct(prodId);
+        return { id: product.id,
+            title: product.title,
+            description: product.description,
+            price: product.price,
+            quantity: product.quantity };
     }
-    updateProduct(prodId, title, desc, price, quantity) {
-        const [product, index] = this.findProduct(prodId);
-        const updatedProduct = Object.assign({}, product);
+    async updateProduct(prodId, title, desc, price, quantity) {
+        const updatedProduct = await this.findProduct(prodId);
         if (title) {
             updatedProduct.title = title;
         }
@@ -40,23 +61,30 @@ let ProductsService = class ProductsService {
         if (quantity) {
             updatedProduct.quantity = quantity;
         }
-        this.products[index] = updatedProduct;
+        updatedProduct.save();
     }
-    findProduct(id) {
-        const productIndex = this.products.findIndex((prod) => prod.id == id);
-        const product = this.products.find((prod) => prod.id == id);
-        if (!product) {
+    async findProduct(id) {
+        let product;
+        try {
+            product = await this.productModel.findById(id);
+        }
+        catch (error) {
             throw new common_1.NotFoundException('No such product here');
         }
-        return [product, productIndex];
+        ;
+        return product;
     }
-    deleteProduct(prodId) {
-        const [product, index] = this.findProduct(prodId);
-        this.products.splice(index, 1);
+    async deleteProduct(prodId) {
+        const result = await this.productModel.deleteOne({ _id: prodId }).exec();
+        if (result.n === 0) {
+            throw new common_1.NotFoundException('No such a product here');
+        }
     }
 };
 ProductsService = __decorate([
-    common_1.Injectable()
+    common_1.Injectable(),
+    __param(0, mongoose_1.InjectModel('Product')),
+    __metadata("design:paramtypes", [mongoose_2.Model])
 ], ProductsService);
 exports.ProductsService = ProductsService;
 //# sourceMappingURL=products.service.js.map

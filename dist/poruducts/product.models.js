@@ -1,14 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class Product {
-    constructor(id, title, description, price, quantity) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.quantity = quantity;
-    }
-    ;
-}
-exports.Product = Product;
+const mongoose = require("mongoose");
+exports.ProductSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    price: { type: Number, required: true },
+    quantity: { type: Number, required: true }
+});
 //# sourceMappingURL=product.models.js.map
