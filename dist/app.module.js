@@ -11,11 +11,12 @@ const mongoose_1 = require("@nestjs/mongoose");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const products_module_1 = require("./poruducts/products.module");
+const users_module_1 = require("./users/users.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
-        imports: [products_module_1.ProductsModule, mongoose_1.MongooseModule.forRoot('mongodb+srv://takiMed:TakiMeda1995.@cluster0-aif7q.mongodb.net/test?retryWrites=true&w=majority')],
+        imports: [products_module_1.ProductsModule, mongoose_1.MongooseModule.forRoot('mongodb+srv://takiMed:<password>@cluster0-aif7q.mongodb.net/test?retryWrites=true&w=majority'), users_module_1.UsersModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

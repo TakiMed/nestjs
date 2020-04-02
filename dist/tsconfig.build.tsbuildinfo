@@ -1157,8 +1157,24 @@
         "version": "f3719ac303e2ae6d73983263a3b61cfdb9e51317ce25688a472ed499dd99f311",
         "signature": "869dc75f2a364405dd7250ffa7f55b4facfc75218498a27b14ca830cdfce65f5"
       },
+      "../src/users/users.model.ts": {
+        "version": "1a22d2ac74977bc46fb09e54903b8cb18f83551ab96ab2470df356920bb12ded",
+        "signature": "4f2d7aa3b2fe05c1aeee977e237dcce69dbf76e21ac1397508f16b4c03954703"
+      },
+      "../src/users/users.service.ts": {
+        "version": "090f44e760fe656ffb3bc3f900136cd5cbcbe8d37ae1ce9d2ecb581c390ba036",
+        "signature": "70498ab429a600dbbe030b593e23ab2f5b002d2659df5c6cbb901f1c59991491"
+      },
+      "../src/users/users.controller.ts": {
+        "version": "731a95f6a309dd9f431f73d91e14dac3dd3058b7295e35767e21ea1c5d2a2b48",
+        "signature": "2591890fdd94c0d55dbf1994180711f6d85af64cf1734987f081282d35e2d3ee"
+      },
+      "../src/users/users.module.ts": {
+        "version": "39fd4456cdb76379766d5a0cfc020f61ee84b981a99ef06cebc6c733d9446808",
+        "signature": "12dec6c99bd8d11167fa91a31e737abbbf8c9cc789c151a25a9a1d13f328175c"
+      },
       "../src/app.module.ts": {
-        "version": "3f785823cdc1f347cbb25e118d6fee437e1d04886f4a2230cd2ca2c3892044e9",
+        "version": "78cda0f1d06ac95822c2aef2a9fa2b7a0e7b3ce56e7306a94cb4d171ec5900b0",
         "signature": "9fc7f7b6ad854404973b8cba8e6d883f758237991968e9a3965d716d46f1da88"
       },
       "../node_modules/@nestjs/core/adapters/http-adapter.d.ts": {
@@ -1313,6 +1329,10 @@
         "version": "48b52264fa193879a074197839dbb4796fa07e86350ff888e5361e06aa46df76",
         "signature": "48b52264fa193879a074197839dbb4796fa07e86350ff888e5361e06aa46df76"
       },
+      "../node_modules/@types/babel-types/index.d.ts": {
+        "version": "d9422bf2f3d2b4a02d901bd80370b6e58b4165e4bf488b99a3687c6eea721d27",
+        "signature": "d9422bf2f3d2b4a02d901bd80370b6e58b4165e4bf488b99a3687c6eea721d27"
+      },
       "../node_modules/@babel/types/lib/index.d.ts": {
         "version": "9566baf39af3e8e8525367b91f8313d0f3dee7dd21aa76bb9ecbc5c3c66df739",
         "signature": "9566baf39af3e8e8525367b91f8313d0f3dee7dd21aa76bb9ecbc5c3c66df739"
@@ -1336,6 +1356,10 @@
       "../node_modules/@types/babel__core/index.d.ts": {
         "version": "cb5df634c024fe13ea293f7aa2b27a9d02f9b3aece975c884485c617d7653e25",
         "signature": "cb5df634c024fe13ea293f7aa2b27a9d02f9b3aece975c884485c617d7653e25"
+      },
+      "../node_modules/@types/babylon/index.d.ts": {
+        "version": "e7ef01fb3213b1be13321648ac2612d60e9e2742e28fc2fcf68d27fb965a8d5c",
+        "signature": "e7ef01fb3213b1be13321648ac2612d60e9e2742e28fc2fcf68d27fb965a8d5c"
       },
       "../node_modules/@types/connect/index.d.ts": {
         "version": "e6ffa74698f0a1d23e4223242ed7dcdb89d02bbbb063a1930e9f91d0385abe16",
@@ -3811,12 +3835,45 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../src/users/users.model.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/users/users.service.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../src/users/users.model.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/users/users.controller.ts": [
+        "../src/users/users.model.ts",
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../src/users/users.service.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/users/users.module.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../src/users/users.controller.ts",
+        "../src/users/users.service.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../src/app.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/mongoose/index.d.ts",
         "../src/app.controller.ts",
         "../src/app.service.ts",
         "../src/poruducts/products.module.ts",
+        "../src/users/users.module.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -4152,6 +4209,12 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../node_modules/@types/babel-types/index.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../node_modules/@babel/types/lib/index.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -4193,6 +4256,13 @@
         "../node_modules/@types/babel__template/index.d.ts",
         "../node_modules/@babel/types/lib/index.d.ts",
         "../node_modules/@babel/parser/typings/babel-parser.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/@types/babylon/index.d.ts": [
+        "../node_modules/@types/babel-types/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -6741,6 +6811,13 @@
         "../src/poruducts/product.models.ts",
         "../src/poruducts/products.service.ts"
       ],
+      "../src/users/users.service.ts": [
+        "../src/users/users.model.ts"
+      ],
+      "../src/users/users.controller.ts": [
+        "../src/users/users.service.ts",
+        "../src/users/users.model.ts"
+      ],
       "../node_modules/@nestjs/core/adapters/http-adapter.d.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/common/interfaces/index.d.ts",
@@ -7063,6 +7140,12 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../node_modules/@types/babel-types/index.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../node_modules/@babel/types/lib/index.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -7104,6 +7187,13 @@
         "../node_modules/@types/babel__template/index.d.ts",
         "../node_modules/@babel/types/lib/index.d.ts",
         "../node_modules/@babel/parser/typings/babel-parser.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/@types/babylon/index.d.ts": [
+        "../node_modules/@types/babel-types/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -7670,9 +7760,13 @@
       "../node_modules/@nestjs/mongoose/dist/index.d.ts",
       "../node_modules/@nestjs/mongoose/index.d.ts",
       "../src/poruducts/product.models.ts",
+      "../src/poruducts/products.service.ts",
       "../src/poruducts/products.controller.ts",
       "../src/poruducts/products.module.ts",
-      "../src/app.module.ts",
+      "../src/users/users.model.ts",
+      "../src/users/users.service.ts",
+      "../src/users/users.controller.ts",
+      "../src/users/users.module.ts",
       "../node_modules/@nestjs/core/adapters/http-adapter.d.ts",
       "../node_modules/@nestjs/core/adapters/index.d.ts",
       "../node_modules/@nestjs/core/injector/module-token-factory.d.ts",
@@ -7711,12 +7805,14 @@
       "../node_modules/@nestjs/core/index.d.ts",
       "../src/main.ts",
       "../node_modules/@types/anymatch/index.d.ts",
+      "../node_modules/@types/babel-types/index.d.ts",
       "../node_modules/@babel/types/lib/index.d.ts",
       "../node_modules/@types/babel__generator/index.d.ts",
       "../node_modules/@types/babel__traverse/index.d.ts",
       "../node_modules/@babel/parser/typings/babel-parser.d.ts",
       "../node_modules/@types/babel__template/index.d.ts",
       "../node_modules/@types/babel__core/index.d.ts",
+      "../node_modules/@types/babylon/index.d.ts",
       "../node_modules/@types/connect/index.d.ts",
       "../node_modules/@types/body-parser/index.d.ts",
       "../node_modules/@types/color-name/index.d.ts",
@@ -7755,7 +7851,7 @@
       "../node_modules/@types/webpack/index.d.ts",
       "../node_modules/@types/yargs-parser/index.d.ts",
       "../node_modules/@types/yargs/index.d.ts",
-      "../src/poruducts/products.service.ts"
+      "../src/app.module.ts"
     ]
   },
   "version": "3.8.3"
