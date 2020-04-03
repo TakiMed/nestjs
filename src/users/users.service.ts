@@ -1,12 +1,25 @@
-import { CreateUserDto } from './dto/create-user-dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { Injectable } from '@nestjs/common';
 import {User, UserRole} from './users.model';
 import * as uuid from 'uuid/v1'
+import { GetUsersFilterDto } from './dto/get-users-filter.dto';
 @Injectable()
 export class UsersService {
     private users:User[]=[];
     getAllUsers(){
         return this.users;
+    }
+    getUsersWithFilter(filterDto:GetUsersFilterDto):User[]{
+        const {role,searchTerm}=filterDto;
+        let users;
+        if(role){
+           users=this.getAllUsers().find(user => user.role===role);
+        }
+        if(searchTerm){
+            users=this.getAllUsers().filter(user =>
+                user.username.includes(searchTerm));
+        }
+        return users;
     }
     createUser(createUserDto:CreateUserDto):User{
         const {username,password}=createUserDto
