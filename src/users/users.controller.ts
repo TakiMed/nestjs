@@ -1,6 +1,6 @@
 import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserRole } from './users.model';
-import { Controller, Get, Post, Body, Param, Patch, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Patch, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { UsersService} from './users.service'
 import { GetUsersFilterDto } from './dto/get-users-filter.dto';
 
@@ -24,6 +24,7 @@ export class UsersController {
     }
 
     @Post()
+    @UsePipes(ValidationPipe) //validirace podatke na osnovu dto-a
     createUser(
        @Body() createUserDto:CreateUserDto
         ):User{
