@@ -35,9 +35,13 @@ export class UsersService {
     getUserByUsername(username:string):User{
         const found=this.users.find(user=>user.username===username)
         if(!found){
-           throw new NotFoundException('No such user found');
+           throw new NotFoundException(`No user with ${username} found`);
         }
         return found;
+    }
+    deleteUser(username:string):void{
+        const found=this.getUserByUsername(username)
+        this.users=this.users.filter(user=>user.username!==found.username);
     }
     updateUserRole(username:string,role:UserRole):User{
         const user=this.getUserByUsername(username);
