@@ -10,7 +10,7 @@ export class UsersController {
     constructor(private usersService:UsersService){}
     //sad sve iz usersservica mozes preko this.usersservice da pristupis
     @Get()
-    getAllUsers(@Query() filterDto:GetUsersFilterDto):User[]{
+    getUsers(@Query(ValidationPipe) filterDto:GetUsersFilterDto):User[]{
         if(Object.keys(filterDto).length){
             return this.usersService.getUsersWithFilter(filterDto);
         }
