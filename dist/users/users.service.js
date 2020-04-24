@@ -5,30 +5,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const user_repository_1 = require("./user.repository");
 const common_1 = require("@nestjs/common");
-const users_model_1 = require("./users.model");
-const uuid = require("uuid/v1");
+const typeorm_1 = require("@nestjs/typeorm");
 let UsersService = class UsersService {
-    constructor() {
-        this.users = [];
+    constructor(userRepository) {
+        this.userRepository = userRepository;
     }
-    getAllUsers() {
-        return this.users;
-    }
-    createUser(username, password) {
-        const user = {
-            id: uuid(),
-            username,
-            password,
-            role: users_model_1.UserRole.USER,
-        };
-        this.users.push(user);
-        return user;
+    async getUserByUsername(username) {
+        const found = await this.userRepository.findOne(username);
+        if (!found) {
+            throw new common_1.NotFoundException(`No user with ${username} found`);
+        }
+        return found;
     }
 };
 UsersService = __decorate([
-    common_1.Injectable()
+    common_1.Injectable(),
+    __param(0, typeorm_1.InjectRepository(user_repository_1.UserRepository)),
+    __metadata("design:paramtypes", [user_repository_1.UserRepository])
 ], UsersService);
 exports.UsersService = UsersService;
 //# sourceMappingURL=users.service.js.map

@@ -1,14 +1,27 @@
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto } from './filters/create-user.dto;
 import { Injectable, NotFoundException } from '@nestjs/common';
-import {User, UserRole} from './users.model';
-import * as uuid from 'uuid/v1'
-import { GetUsersFilterDto } from './dto/get-users-filter.dto';
+
+import {User} from './user.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+
+
 @Injectable()
 export class UsersService {
-    private users:User[]=[];
-    getAllUsers(){
+    constructor (
+        @InjectRepository(UserRepository)
+        private userRepository:UserRepository,
+    ){}
+   /* getAllUsers(){
         return this.users;
+    }*/
+    async getUserByUsername(username:string):Promise<User>{
+        const found= await this.userRepository.findOne(username);
+        if(!found){
+           throw new NotFoundException(`No user with ${username} found`);
+        }
+        return found;
     }
+    
     getUsersWithFilter(filterDto:GetUsersFilterDto):User[]{
         const {role,searchTerm}=filterDto;
         let users;
@@ -32,13 +45,6 @@ export class UsersService {
         this.users.push(user);
         return user;
     }
-    getUserByUsername(username:string):User{
-        const found=this.users.find(user=>user.username===username)
-        if(!found){
-           throw new NotFoundException(`No user with ${username} found`);
-        }
-        return found;
-    }
     deleteUser(username:string):void{
         const found=this.getUserByUsername(username)
         this.users=this.users.filter(user=>user.username!==found.username);
@@ -48,5 +54,4 @@ export class UsersService {
         user.role=role;
         return user
     }
-
 }

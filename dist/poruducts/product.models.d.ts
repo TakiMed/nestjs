@@ -6,4 +6,5 @@ export interface Product extends mongoose.Document {
     description: string;
     price: number;
     quantity: number;
+    creator: mongoose.Schema.Types.ObjectId;
 }

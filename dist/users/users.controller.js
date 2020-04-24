@@ -18,27 +18,17 @@ let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
     }
-    getAllUsers() {
-        return this.usersService.getAllUsers();
-    }
-    createUser(username, password) {
-        return this.usersService.createUser(username, password);
+    getUserByUsername(username) {
+        return this.usersService.getUserByUsername(username);
     }
 };
 __decorate([
-    common_1.Get(),
+    common_1.Get('/:username'),
+    __param(0, common_1.Param('username')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Array)
-], UsersController.prototype, "getAllUsers", null);
-__decorate([
-    common_1.Post(),
-    __param(0, common_1.Body('username')),
-    __param(1, common_1.Body('password')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
-    __metadata("design:returntype", Object)
-], UsersController.prototype, "createUser", null);
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getUserByUsername", null);
 UsersController = __decorate([
     common_1.Controller('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])

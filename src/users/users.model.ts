@@ -1,3 +1,6 @@
+import { UserRole } from './user.role.enum';
+import * as mongoose from 'mongoose';
+
 export interface User {
     id:string;
     username:string;
@@ -5,7 +8,14 @@ export interface User {
     role:UserRole;
 }
 
-export enum UserRole{
-    ADMIN='ADMIN',
-    USER='USER',
-}
+export const UserSchema= new mongoose.Schema({
+    id:String,
+    username:{type :String, required:true},
+    password:{type :String, required:true},
+    role:{type:UserRole, requiredL:true},
+    createdProducts:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Product'
+    }]
+});
+module.exports=mongoose.model('User',UserSchema);

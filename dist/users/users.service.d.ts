@@ -1,6 +1,7 @@
-import { User } from './users.model';
+import { UserRepository } from './user.repository';
+import { User } from './user.entity';
 export declare class UsersService {
-    private users;
-    getAllUsers(): User[];
-    createUser(username: string, password: string): User;
+    private userRepository;
+    constructor(userRepository: UserRepository);
+    getUserByUsername(username: string): Promise<User>;
 }
