@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import { IsString, Length, IsNumber, IsInt, Min, Max, IsMongoId } from 'class-validator';
 
 export const ProductSchema= new mongoose.Schema({
     title:{type :String, required:true},
@@ -8,14 +9,26 @@ export const ProductSchema= new mongoose.Schema({
     creator:{type:mongoose.Schema.Types.ObjectId, ref:'User'}
 });
 
-export interface Product extends mongoose.Document{
-  //interface ne koristi public
-  id:string; //id ce biti _id autogenerisan iz baze
+export class Product extends mongoose.Document{
+  @IsMongoId() 
+  _id:string;
+  
+  @IsString()
   title:string;
+
+  @IsString()
+  @Length(3,100)
   description:string;
+
+  @IsNumber()
   price:number;
+
+  @IsInt()
+  @Min(0)
+  @Max(20)
   quantity:number;
-  creator:mongoose.Schema.Types.ObjectId
+  
+  //creator:mongoose.Schema.Types.ObjectId
 }
 module.exports=mongoose.model('Product',ProductSchema);
 

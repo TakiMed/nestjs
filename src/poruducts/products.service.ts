@@ -27,7 +27,7 @@ export class ProductsService{
         title:product.title,
         description:product.description,
         price:product.price,
-        quantity:product.quantity}; //return as new obj
+        quantity:product.quantity};
     }
 
     async updateProduct(prodId:string,changes:Partial<Product>):Promise<Product>{

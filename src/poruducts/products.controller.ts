@@ -1,5 +1,5 @@
-import { HttpExceptionFilter } from './filters/http.filter';
-import { InjectModel } from '@nestjs/mongoose';
+import { ToIntPipe } from './pipes.ts/toint.pipe';
+
 import { Controller, Get, Body, Post, Param, Patch, Delete, UseFilters } from '@nestjs/common';
 import {ProductsService} from './products.service'
 import { Product } from './product.models';
@@ -8,7 +8,8 @@ export class ProductsController {
     constructor(
         private readonly productsService:ProductsService){}
     @Post()
-    async addProduct(@Body() product:Partial<Product>):Promise<Product>{
+    async addProduct(
+        @Body() product:Product):Promise<Product>{
         return await this.productsService.insertProduct(product);
     }
     @Get()
@@ -24,7 +25,7 @@ export class ProductsController {
 
     @Patch(':id')
     async updateProduct(@Param('id') prodId:string,
-    @Body() changes:Partial<Product>):Promise<Product>{
+    @Body() changes:Product):Promise<Product>{
         const result = await this.productsService.updateProduct(prodId,changes)
         return result;
     }
