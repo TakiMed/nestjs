@@ -1,23 +1,17 @@
+import { InjectModel } from '@nestjs/mongoose';
 import { Controller, Get, Body, Post, Param, Patch, Delete } from '@nestjs/common';
 import {ProductsService} from './products.service'
+import { Product } from './product.models';
 @Controller('products')
 export class ProductsController {
-    constructor(private readonly productsService:ProductsService){}
+    constructor(
+        private readonly productsService:ProductsService){}
     @Post()
-    async addProduct(@Body('title') prodTitle:string,
-    @Body('description') prodDesc:string,
-    @Body('price') prodPrice:number,
-    @Body('quantity') prodQuantity:number,
-    ){
-        const generatedId=await this.productsService.insertProduct(
-            prodTitle,
-            prodDesc,
-            prodPrice,
-            prodQuantity);
-        return {id:generatedId};
+    async addProduct(@Body() product:Partial<Product>):Promise<Product>{
+        return await this.productsService.insertProduct(product);
     }
     @Get()
-    async getAllProducts(){
+    async getAllProducts():Promise<Product[]>{
         const products= await this.productsService.getProducts();
         return products;
     }
@@ -29,16 +23,13 @@ export class ProductsController {
 
     @Patch(':id')
     async updateProduct(@Param('id') prodId:string,
-    @Body('title') prodTitle:string,
-    @Body('description') prodDesc:string,
-    @Body('price') prodPrice:number,
-    @Body('quantity') prodQuantity:number,){
-        const result = await this.productsService.updateProduct(prodId,prodTitle,prodDesc,prodPrice,prodQuantity)
+    @Body() changes:Partial<Product>):Promise<Product>{
+        const result = await this.productsService.updateProduct(prodId,changes)
         return result;
     }
 
     @Delete(':id')
-    async removeProduct(@Param('id') prodId:string){
+    async removeProduct(@Param('id') prodId:string):Promise<void>{
         await this.productsService.deleteProduct(prodId);
         return null;
     }

@@ -12,7 +12,7 @@ export const UserSchema= new mongoose.Schema({
     id:String,
     username:{type :String, required:true},
     password:{type :String, required:true},
-    role:{type:UserRole, requiredL:true},
+    role:{type:UserRole, required:true},
     createdProducts:[{
         type: mongoose.Schema.Types.ObjectId,
         ref:'Product'

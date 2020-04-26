@@ -5,32 +5,20 @@ import {Model} from 'mongoose'
 import { TimeoutError } from 'rxjs';
 @Injectable()
 export class ProductsService{
-    //odje ce lista proizvoda
     private products: Product[]=[];
     constructor(@InjectModel('Product') 
     private readonly productModel:Model<Product>
     ){}
 
-    async insertProduct(title:string,desc:string,price:number,quantity:number):Promise<string>{
-        const prodId= Math.random().toString();
-        const newProduct= new this.productModel({
-            title,
-            description:desc,
-            price,
-            quantity
-        });
-        const result= await newProduct.save(); //cuva u bazu 
-        return result.id as string;
+    async insertProduct(product:Partial<Product>):Promise<Product>{
+        const newProd=await this.productModel.create(product);
+        await newProd.save();
+        return newProd.toObject();
     }
 
     async getProducts():Promise<Product[]>{
-        const products = await this.productModel.find().exec();
-        return products.map((prod)=>
-        ({  id:prod.id,
-            title:prod.title,
-            description:prod.description,
-            price:prod.price,
-            quantity:prod.quantity})) as Product []; //dodajes kao nove ekemente, novi niz -pravis kopiju
+        const products = await this.productModel.find({_v:0}).exec();
+        return products
     }
 
     async getSingleProduct(prodId:string):Promise<any>{
@@ -42,15 +30,18 @@ export class ProductsService{
         quantity:product.quantity}; //return as new obj
     }
 
-    async updateProduct(prodId:string,title:string,desc:string,price:number,quantity:number):Promise<void>{
-        const updatedProduct=await this.findProduct(prodId);
-        if(title){updatedProduct.title=title}
-        if(desc){updatedProduct.description=desc}
-        if(price){updatedProduct.price=price}
-        if(quantity){updatedProduct.quantity=quantity}
+    async updateProduct(prodId:string,changes:Partial<Product>):Promise<Product>{
+        const updatedProduct=await this.productModel.findOneAndUpdate({_id:prodId},changes);
         updatedProduct.save();
+        return updatedProduct;
     }
 
+    async deleteProduct(prodId:string):Promise<void>{
+        const result=await this.productModel.deleteOne({_id:prodId}).exec();
+        if(result.n===0){
+            throw new NotFoundException('No such a product here');
+        }
+    }
     private async findProduct(id:string):Promise<Product>{
         let product;
         try{
@@ -60,12 +51,5 @@ export class ProductsService{
             throw new NotFoundException('No such product here');
         };
         return product;
-    }
-
-    async deleteProduct(prodId:string):Promise<void>{
-        const result=await this.productModel.deleteOne({_id:prodId}).exec();
-        if(result.n===0){
-            throw new NotFoundException('No such a product here');
-        }
     }
 }
