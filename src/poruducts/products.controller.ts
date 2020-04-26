@@ -1,5 +1,6 @@
+import { HttpExceptionFilter } from './filters/http.filter';
 import { InjectModel } from '@nestjs/mongoose';
-import { Controller, Get, Body, Post, Param, Patch, Delete } from '@nestjs/common';
+import { Controller, Get, Body, Post, Param, Patch, Delete, UseFilters } from '@nestjs/common';
 import {ProductsService} from './products.service'
 import { Product } from './product.models';
 @Controller('products')
