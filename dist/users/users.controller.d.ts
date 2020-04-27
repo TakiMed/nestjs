@@ -1,7 +1,8 @@
-import { User } from './user.entity';
+import { User } from './users.model';
 import { UsersService } from './users.service';
 export declare class UsersController {
-    private usersService;
-    constructor(usersService: UsersService);
-    getUserByUsername(username: string): Promise<User>;
+    private readonly userService;
+    constructor(userService: UsersService);
+    getAllUsers(): Promise<User[]>;
+    findByUsername(username: string): Promise<User>;
 }

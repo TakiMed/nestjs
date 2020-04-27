@@ -1,21 +1,24 @@
 import { UserRole } from './user.role.enum';
 import * as mongoose from 'mongoose';
+import { IsMongoId, IsString, Length, IsIn } from 'class-validator';
 
-export interface User {
-    id:string;
+export class User extends mongoose.Document {
+    @IsMongoId()
+    _id:string;
+    
+    @IsString()
+    @Length(5,15)
     username:string;
+    
     password:string;
+    
+    @IsIn([UserRole.ADMIN,UserRole.USER])
     role:UserRole;
 }
 
 export const UserSchema= new mongoose.Schema({
-    id:String,
     username:{type :String, required:true},
     password:{type :String, required:true},
     role:{type:UserRole, required:true},
-    createdProducts:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'Product'
-    }]
 });
 module.exports=mongoose.model('User',UserSchema);

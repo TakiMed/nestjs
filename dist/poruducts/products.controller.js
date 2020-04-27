@@ -14,13 +14,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const products_service_1 = require("./products.service");
+const product_models_1 = require("./product.models");
 let ProductsController = class ProductsController {
     constructor(productsService) {
         this.productsService = productsService;
     }
-    async addProduct(prodTitle, prodDesc, prodPrice, prodQuantity) {
-        const generatedId = await this.productsService.insertProduct(prodTitle, prodDesc, prodPrice, prodQuantity);
-        return { id: generatedId };
+    async addProduct(product) {
+        return await this.productsService.insertProduct(product);
     }
     async getAllProducts() {
         const products = await this.productsService.getProducts();
@@ -30,8 +30,8 @@ let ProductsController = class ProductsController {
         const product = await this.productsService.getSingleProduct(prodId);
         return product;
     }
-    async updateProduct(prodId, prodTitle, prodDesc, prodPrice, prodQuantity) {
-        const result = await this.productsService.updateProduct(prodId, prodTitle, prodDesc, prodPrice, prodQuantity);
+    async updateProduct(prodId, changes) {
+        const result = await this.productsService.updateProduct(prodId, changes);
         return result;
     }
     async removeProduct(prodId) {
@@ -41,12 +41,9 @@ let ProductsController = class ProductsController {
 };
 __decorate([
     common_1.Post(),
-    __param(0, common_1.Body('title')),
-    __param(1, common_1.Body('description')),
-    __param(2, common_1.Body('price')),
-    __param(3, common_1.Body('quantity')),
+    __param(0, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, Number, Number]),
+    __metadata("design:paramtypes", [product_models_1.Product]),
     __metadata("design:returntype", Promise)
 ], ProductsController.prototype, "addProduct", null);
 __decorate([
@@ -65,12 +62,9 @@ __decorate([
 __decorate([
     common_1.Patch(':id'),
     __param(0, common_1.Param('id')),
-    __param(1, common_1.Body('title')),
-    __param(2, common_1.Body('description')),
-    __param(3, common_1.Body('price')),
-    __param(4, common_1.Body('quantity')),
+    __param(1, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, String, Number, Number]),
+    __metadata("design:paramtypes", [String, product_models_1.Product]),
     __metadata("design:returntype", Promise)
 ], ProductsController.prototype, "updateProduct", null);
 __decorate([

@@ -1,1 +1,1 @@
-export const MONGO_URL:string="mongodb+srv://takiMed:TakiMeda1995.@cluster0-aif7q.mongodb.net/nestjs-products?retryWrites=true&w=majority"
+export const MONGO_URL:string="mongodb+srv://takiMed:TakiMeda1995.@cluster0-aif7q.mongodb.net/test?retryWrites=true&w=majority"

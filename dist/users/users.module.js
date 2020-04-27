@@ -9,13 +9,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const users_controller_1 = require("./users.controller");
 const users_service_1 = require("./users.service");
-const typeorm_1 = require("@nestjs/typeorm");
-const user_repository_1 = require("./user.repository");
+const mongoose_1 = require("@nestjs/mongoose");
+const users_model_1 = require("./users.model");
 let UsersModule = class UsersModule {
 };
 UsersModule = __decorate([
     common_1.Module({
-        imports: [typeorm_1.TypeOrmModule.forFeature([user_repository_1.UserRepository]),
+        imports: [
+            mongoose_1.MongooseModule.forFeature([,
+                { name: 'User', schema: users_model_1.UserSchema }]),
         ],
         controllers: [users_controller_1.UsersController],
         providers: [users_service_1.UsersService]

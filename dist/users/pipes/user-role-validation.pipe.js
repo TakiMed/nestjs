@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const users_model_1 = require("./../users.model");
+const user_role_enum_1 = require("../user.role.enum");
 const common_1 = require("@nestjs/common");
 class UserRoleValidationPipe {
     constructor() {
         this.allowRoles = [
-            users_model_1.UserRole.ADMIN,
-            users_model_1.UserRole.USER
+            user_role_enum_1.UserRole.ADMIN,
+            user_role_enum_1.UserRole.USER
         ];
     }
     transform(value) {

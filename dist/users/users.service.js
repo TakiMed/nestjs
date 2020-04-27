@@ -12,25 +12,26 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const user_repository_1 = require("./user.repository");
+const mongoose_1 = require("mongoose");
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("@nestjs/typeorm");
+const mongoose_2 = require("@nestjs/mongoose");
 let UsersService = class UsersService {
-    constructor(userRepository) {
-        this.userRepository = userRepository;
+    constructor(userModel) {
+        this.userModel = userModel;
     }
-    async getUserByUsername(username) {
-        const found = await this.userRepository.findOne(username);
-        if (!found) {
-            throw new common_1.NotFoundException(`No user with ${username} found`);
-        }
-        return found;
+    async getAllUsers() {
+        return this.userModel.find();
+    }
+    async findByUsername(username) {
+        return this.userModel.findOne({
+            username: username
+        });
     }
 };
 UsersService = __decorate([
     common_1.Injectable(),
-    __param(0, typeorm_1.InjectRepository(user_repository_1.UserRepository)),
-    __metadata("design:paramtypes", [user_repository_1.UserRepository])
+    __param(0, mongoose_2.InjectModel("User")),
+    __metadata("design:paramtypes", [mongoose_1.Model])
 ], UsersService);
 exports.UsersService = UsersService;
 //# sourceMappingURL=users.service.js.map

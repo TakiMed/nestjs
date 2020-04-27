@@ -7,17 +7,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const mongoose_1 = require("@nestjs/mongoose");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
-const products_module_1 = require("./poruducts/products.module");
 const users_module_1 = require("./users/users.module");
-const typeorm_config_1 = require("./config/typeorm.config");
-const typeorm_1 = require("@nestjs/typeorm");
+const constants_1 = require("./constants");
+const products_module_1 = require("./poruducts/products.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
-        imports: [products_module_1.ProductsModule, typeorm_1.TypeOrmModule.forRoot(typeorm_config_1.typeOrmConfig), users_module_1.UsersModule],
+        imports: [mongoose_1.MongooseModule.forRoot(constants_1.MONGO_URL), products_module_1.ProductsModule, users_module_1.UsersModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

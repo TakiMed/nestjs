@@ -20,24 +20,14 @@ let ProductsService = class ProductsService {
         this.productModel = productModel;
         this.products = [];
     }
-    async insertProduct(title, desc, price, quantity) {
-        const prodId = Math.random().toString();
-        const newProduct = new this.productModel({
-            title,
-            description: desc,
-            price,
-            quantity
-        });
-        const result = await newProduct.save();
-        return result.id;
+    async insertProduct(product) {
+        const newProd = await this.productModel.create(product);
+        await newProd.save();
+        return newProd.toObject();
     }
     async getProducts() {
-        const products = await this.productModel.find().exec();
-        return products.map((prod) => ({ id: prod.id,
-            title: prod.title,
-            description: prod.description,
-            price: prod.price,
-            quantity: prod.quantity }));
+        const products = await this.productModel.find({ _v: 0 }).exec();
+        return products;
     }
     async getSingleProduct(prodId) {
         const product = await this.findProduct(prodId);
@@ -47,21 +37,16 @@ let ProductsService = class ProductsService {
             price: product.price,
             quantity: product.quantity };
     }
-    async updateProduct(prodId, title, desc, price, quantity) {
-        const updatedProduct = await this.findProduct(prodId);
-        if (title) {
-            updatedProduct.title = title;
-        }
-        if (desc) {
-            updatedProduct.description = desc;
-        }
-        if (price) {
-            updatedProduct.price = price;
-        }
-        if (quantity) {
-            updatedProduct.quantity = quantity;
-        }
+    async updateProduct(prodId, changes) {
+        const updatedProduct = await this.productModel.findOneAndUpdate({ _id: prodId }, changes);
         updatedProduct.save();
+        return updatedProduct;
+    }
+    async deleteProduct(prodId) {
+        const result = await this.productModel.deleteOne({ _id: prodId }).exec();
+        if (result.n === 0) {
+            throw new common_1.NotFoundException('No such a product here');
+        }
     }
     async findProduct(id) {
         let product;
@@ -73,12 +58,6 @@ let ProductsService = class ProductsService {
         }
         ;
         return product;
-    }
-    async deleteProduct(prodId) {
-        const result = await this.productModel.deleteOne({ _id: prodId }).exec();
-        if (result.n === 0) {
-            throw new common_1.NotFoundException('No such a product here');
-        }
     }
 };
 ProductsService = __decorate([

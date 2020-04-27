@@ -12,25 +12,34 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
+const common_1 = require("@nestjs/common");
 let UsersController = class UsersController {
-    constructor(usersService) {
-        this.usersService = usersService;
+    constructor(userService) {
+        this.userService = userService;
     }
-    getUserByUsername(username) {
-        return this.usersService.getUserByUsername(username);
+    async getAllUsers() {
+        return this.userService.getAllUsers();
+    }
+    async findByUsername(username) {
+        return this.userService.findByUsername(username);
     }
 };
 __decorate([
-    common_1.Get('/:username'),
+    common_1.Get(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getAllUsers", null);
+__decorate([
+    common_1.Get(),
     __param(0, common_1.Param('username')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "getUserByUsername", null);
+], UsersController.prototype, "findByUsername", null);
 UsersController = __decorate([
-    common_1.Controller('users'),
+    common_1.Controller("users"),
     __metadata("design:paramtypes", [users_service_1.UsersService])
 ], UsersController);
 exports.UsersController = UsersController;
