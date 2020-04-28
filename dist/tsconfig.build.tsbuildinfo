@@ -1230,35 +1230,31 @@
         "signature": "dbb9a798889137235e43d85733f889fa4355e8ea768ed7d14422774565ef6e2a"
       },
       "../src/users/users.module.ts": {
-        "version": "914c898ecc442cefc656063e78ebeea5b4d718e22bf3c3e0627ad008bc69f0f1",
+        "version": "6cf5123686e6e552e1a08a028afb2e48beac07fb1dcc3238710603902ab3f884",
         "signature": "12dec6c99bd8d11167fa91a31e737abbbf8c9cc789c151a25a9a1d13f328175c"
       },
       "../src/constants.ts": {
         "version": "50143998d998fd5b1bdbe4228cb4dd60b8e17e9e74553d9da022c77c96e8fe31",
         "signature": "dfb8540a868816e6b78989742a44aaad407ea4b8762627972ebc444bb24efa71"
       },
-      "../src/poruducts/pipes.ts/toint.pipe.ts": {
-        "version": "274c3b64e7794ff9a94010f9883970bac0437def828a5fda6ebb9fff5c68e302",
-        "signature": "57bed4f19b6b8263992355f58bd62b1c26c50f2ca1a54ebfff3a0453f11859c3"
+      "../src/products/product.models.ts": {
+        "version": "7194fda2b1890e862707e0ee07fa07d83cb17a15000a8662afd547c35a216931",
+        "signature": "0d9d67fdf9dba5c872830e7893e81a2b977738f822f7e9611b1a3eff82d4354a"
       },
-      "../src/poruducts/product.models.ts": {
-        "version": "f6f1b1ee56eaf272394c865d2e47f9685560851872f00d7aea29e21869b6d9f4",
-        "signature": "b48d2130782d33558b6b9d29d2713be70a8019e955a7920ec9956c34eb28c14f"
-      },
-      "../src/poruducts/products.service.ts": {
-        "version": "44cbac07a3049379d8b103f6fde16ce86ac5029d226d3c8e3e9a9daf38b91072",
+      "../src/products/products.service.ts": {
+        "version": "d9dc2cd23fac4a3985886a06607719b24cd5a040b2d3ffa785eb272f0823577e",
         "signature": "931c2eab271dd113b723cb60f47f8e2941142a6f4b8bd9cad30163270cca5d93"
       },
-      "../src/poruducts/products.controller.ts": {
-        "version": "14dca0084cb06fd8bccc46963aad5970b48e1f03f26b6bf62a4cfdb8f78e8896",
+      "../src/products/products.controller.ts": {
+        "version": "e501aebf3517c54ed87f32217513a48237348f05f2967b1229710bc1ae723fa0",
         "signature": "75e6242f9029bd21142df870393c46daba81c24ba954cb73a65614d2a0d53136"
       },
-      "../src/poruducts/products.module.ts": {
-        "version": "ab0fc47b3a84869c6d1973550d3591388d838eee99c88f4c7b26713e748cb6a5",
+      "../src/products/products.module.ts": {
+        "version": "315fc54da5674a729c3c3d47c6706772891e59922e1146370e48955551036f7a",
         "signature": "869dc75f2a364405dd7250ffa7f55b4facfc75218498a27b14ca830cdfce65f5"
       },
       "../src/app.module.ts": {
-        "version": "07690b40ab8939ac8cdc98cdf3fdb473dab3d827161a4a11ed62f9dd89ff3eb6",
+        "version": "6c4440dd29ac05b9587c1fc89fe3b7f2fb6ab18893e7883f965873c346e27653",
         "signature": "9fc7f7b6ad854404973b8cba8e6d883f758237991968e9a3965d716d46f1da88"
       },
       "../src/products/filters/fallback.filter.ts": {
@@ -1422,40 +1418,8 @@
         "signature": "36f8a831e74de2b719a191d1a457a59bcfcfff4fd38f34723b1e2559be6b3a37"
       },
       "../src/main.ts": {
-        "version": "f18af960af7492a29fae93ecd0d92af2f7e1ae0260caca64f0b9ec8c64eb6636",
+        "version": "6908c9dceb8a6220acb8156dc29b8de137521df8f2f4c186eed46de9f2d20738",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6"
-      },
-      "../src/poruducts/filters/fallback.filter.ts": {
-        "version": "4b27d3e740e3fd3b6e7f9d0a7fef2d609645e0b14485b8592e5aa0f981cc3063",
-        "signature": "05074c3f68bb1415981fd1373b8e32687b0f80fc4caf6ad607e6714735ef7b9e"
-      },
-      "../src/poruducts/filters/http.filter.ts": {
-        "version": "f6b3f42f721ce8db233bd010f20dba493cfd142fa23ba69381abd1de5e2f6620",
-        "signature": "29c3e922ec78178a583b4fb399cadadab4092603b6d449b5dc42b99134d689dd"
-      },
-      "../src/poruducts/filters/validation.exception.ts": {
-        "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-      },
-      "../src/poruducts/filters/validation.filter.ts": {
-        "version": "c43a4125f2a41d290530d67e88e27ae38dc3fe0ca04423b81c59fe35706423d8",
-        "signature": "a7f74c5d229d0d63be2cbf7f7653a61d510795311d308d1e4563b987c91d6bd4"
-      },
-      "../src/products/product.models.ts": {
-        "version": "7194fda2b1890e862707e0ee07fa07d83cb17a15000a8662afd547c35a216931",
-        "signature": "0d9d67fdf9dba5c872830e7893e81a2b977738f822f7e9611b1a3eff82d4354a"
-      },
-      "../src/products/products.service.ts": {
-        "version": "c56d95935a0ccf475e52b2bad8aab5d768b2d0b76c5e5f3b45d64f8557f664ec",
-        "signature": "931c2eab271dd113b723cb60f47f8e2941142a6f4b8bd9cad30163270cca5d93"
-      },
-      "../src/products/products.controller.ts": {
-        "version": "1a1fbb1adf740eda7bd48f8f321a5deba6f84462ff83ed575dca6e46c6efe799",
-        "signature": "ef0ef5085ec9fe73ecea137db023c5ae9bd45c8d04cb927e4caacc8bad14418c"
-      },
-      "../src/products/products.module.ts": {
-        "version": "d5703d072f81e1fe81a41a506c54f90217f29db72d1872d2dccb05e5e48d3c74",
-        "signature": "869dc75f2a364405dd7250ffa7f55b4facfc75218498a27b14ca830cdfce65f5"
       },
       "../src/products/pipes.ts/toint.pipe.ts": {
         "version": "274c3b64e7794ff9a94010f9883970bac0437def828a5fda6ebb9fff5c68e302",
@@ -4138,14 +4102,7 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../src/poruducts/pipes.ts/toint.pipe.ts": [
-        "../node_modules/@nestjs/common/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/poruducts/product.models.ts": [
+      "../src/products/product.models.ts": [
         "../node_modules/@types/mongoose/index.d.ts",
         "../node_modules/class-validator/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
@@ -4153,33 +4110,32 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../src/poruducts/products.service.ts": [
-        "../src/poruducts/product.models.ts",
+      "../src/products/products.service.ts": [
+        "../src/products/product.models.ts",
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/mongoose/index.d.ts",
         "../node_modules/@types/mongoose/index.d.ts",
-        "../node_modules/rxjs/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../src/poruducts/products.controller.ts": [
-        "../src/poruducts/pipes.ts/toint.pipe.ts",
+      "../src/products/products.controller.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
-        "../src/poruducts/products.service.ts",
-        "../src/poruducts/product.models.ts",
+        "../src/products/products.service.ts",
+        "../src/products/product.models.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../src/poruducts/products.module.ts": [
+      "../src/products/products.module.ts": [
+        "../src/users/users.model.ts",
         "../node_modules/@nestjs/common/index.d.ts",
-        "../src/poruducts/products.controller.ts",
-        "../src/poruducts/products.service.ts",
+        "../src/products/products.controller.ts",
+        "../src/products/products.service.ts",
         "../node_modules/@nestjs/mongoose/index.d.ts",
-        "../src/poruducts/product.models.ts",
+        "../src/products/product.models.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -4192,7 +4148,7 @@
         "../src/app.service.ts",
         "../src/users/users.module.ts",
         "../src/constants.ts",
-        "../src/poruducts/products.module.ts",
+        "../src/products/products.module.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -4551,72 +4507,6 @@
         "../src/app.module.ts",
         "../src/products/filters/validation.filter.ts",
         "../src/products/filters/validation.exception.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/poruducts/filters/fallback.filter.ts": [
-        "../node_modules/@nestjs/common/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/poruducts/filters/http.filter.ts": [
-        "../node_modules/@nestjs/common/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/poruducts/filters/validation.exception.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/poruducts/filters/validation.filter.ts": [
-        "../node_modules/@nestjs/common/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/products/product.models.ts": [
-        "../node_modules/@types/mongoose/index.d.ts",
-        "../node_modules/class-validator/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/products/products.service.ts": [
-        "../src/products/product.models.ts",
-        "../node_modules/@nestjs/common/index.d.ts",
-        "../node_modules/@nestjs/mongoose/index.d.ts",
-        "../node_modules/@types/mongoose/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/products/products.controller.ts": [
-        "../node_modules/@nestjs/common/index.d.ts",
-        "../src/products/products.service.ts",
-        "../src/products/product.models.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/products/products.module.ts": [
-        "../src/users/users.model.ts",
-        "../node_modules/@nestjs/common/index.d.ts",
-        "../src/products/products.controller.ts",
-        "../src/products/products.service.ts",
-        "../node_modules/@nestjs/mongoose/index.d.ts",
-        "../src/products/product.models.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -7396,26 +7286,29 @@
         "../node_modules/@types/mongoose/index.d.ts"
       ],
       "../src/users/users.service.ts": [
-        "../src/users/users.model.ts",
-        "../node_modules/@types/mongoose/index.d.ts"
+        "../node_modules/@types/mongoose/index.d.ts",
+        "../src/users/users.model.ts"
       ],
       "../src/users/users.controller.ts": [
-        "../src/users/users.model.ts",
-        "../src/users/users.service.ts"
+        "../src/users/users.service.ts",
+        "../src/users/users.model.ts"
       ],
-      "../src/poruducts/pipes.ts/toint.pipe.ts": [
-        "../node_modules/@nestjs/common/index.d.ts"
-      ],
-      "../src/poruducts/product.models.ts": [
+      "../src/products/product.models.ts": [
         "../node_modules/@types/mongoose/index.d.ts"
       ],
-      "../src/poruducts/products.service.ts": [
+      "../src/products/products.service.ts": [
         "../node_modules/@types/mongoose/index.d.ts",
-        "../src/poruducts/product.models.ts"
+        "../src/products/product.models.ts"
       ],
-      "../src/poruducts/products.controller.ts": [
-        "../src/poruducts/products.service.ts",
-        "../src/poruducts/product.models.ts"
+      "../src/products/products.controller.ts": [
+        "../src/products/products.service.ts",
+        "../src/products/product.models.ts"
+      ],
+      "../src/products/filters/fallback.filter.ts": [
+        "../node_modules/@nestjs/common/index.d.ts"
+      ],
+      "../src/products/filters/http.filter.ts": [
+        "../node_modules/@nestjs/common/index.d.ts"
       ],
       "../node_modules/@nestjs/core/adapters/http-adapter.d.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
@@ -7733,13 +7626,14 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../src/poruducts/filters/fallback.filter.ts": [
+      "../src/products/filters/validation.exception.ts": [
         "../node_modules/@nestjs/common/index.d.ts"
       ],
-      "../src/poruducts/filters/http.filter.ts": [
+      "../src/products/filters/validation.filter.ts": [
+        "../src/products/filters/validation.exception.ts",
         "../node_modules/@nestjs/common/index.d.ts"
       ],
-      "../src/poruducts/filters/validation.filter.ts": [
+      "../src/products/pipes.ts/toint.pipe.ts": [
         "../node_modules/@nestjs/common/index.d.ts"
       ],
       "../src/users/filters/get-users-filter.dto.ts": [
@@ -8086,33 +7980,6 @@
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/products/filters/fallback.filter.ts": [
-        "../node_modules/@nestjs/common/index.d.ts"
-      ],
-      "../src/products/filters/http.filter.ts": [
-        "../node_modules/@nestjs/common/index.d.ts"
-      ],
-      "../src/products/filters/validation.exception.ts": [
-        "../node_modules/@nestjs/common/index.d.ts"
-      ],
-      "../src/products/filters/validation.filter.ts": [
-        "../src/products/filters/validation.exception.ts",
-        "../node_modules/@nestjs/common/index.d.ts"
-      ],
-      "../src/products/product.models.ts": [
-        "../node_modules/@types/mongoose/index.d.ts"
-      ],
-      "../src/products/products.controller.ts": [
-        "../src/products/products.service.ts",
-        "../src/products/product.models.ts"
-      ],
-      "../src/products/products.service.ts": [
-        "../node_modules/@types/mongoose/index.d.ts",
-        "../src/products/product.models.ts"
-      ],
-      "../src/products/pipes.ts/toint.pipe.ts": [
-        "../node_modules/@nestjs/common/index.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -8423,14 +8290,14 @@
       "../src/users/users.model.ts",
       "../src/users/users.service.ts",
       "../src/users/users.controller.ts",
-      "../src/users/users.module.ts",
       "../src/constants.ts",
-      "../src/poruducts/pipes.ts/toint.pipe.ts",
-      "../src/poruducts/product.models.ts",
-      "../src/poruducts/products.service.ts",
-      "../src/poruducts/products.controller.ts",
-      "../src/poruducts/products.module.ts",
+      "../src/products/product.models.ts",
+      "../src/products/products.service.ts",
+      "../src/products/products.controller.ts",
+      "../src/products/products.module.ts",
       "../src/app.module.ts",
+      "../src/products/filters/fallback.filter.ts",
+      "../src/products/filters/http.filter.ts",
       "../node_modules/@nestjs/core/adapters/http-adapter.d.ts",
       "../node_modules/@nestjs/core/adapters/index.d.ts",
       "../node_modules/@nestjs/core/injector/module-token-factory.d.ts",
@@ -8467,9 +8334,10 @@
       "../node_modules/@nestjs/core/services/reflector.service.d.ts",
       "../node_modules/@nestjs/core/services/index.d.ts",
       "../node_modules/@nestjs/core/index.d.ts",
-      "../src/poruducts/filters/fallback.filter.ts",
-      "../src/poruducts/filters/http.filter.ts",
-      "../src/poruducts/filters/validation.exception.ts",
+      "../src/products/filters/validation.exception.ts",
+      "../src/products/filters/validation.filter.ts",
+      "../src/main.ts",
+      "../src/products/pipes.ts/toint.pipe.ts",
       "../src/users/filters/create-user.dto.ts",
       "../src/users/filters/get-users-filter.dto.ts",
       "../src/users/pipes/user-role-validation.pipe.ts",
@@ -8520,17 +8388,7 @@
       "../node_modules/@types/webpack/index.d.ts",
       "../node_modules/@types/yargs-parser/index.d.ts",
       "../node_modules/@types/yargs/index.d.ts",
-      "../src/products/filters/fallback.filter.ts",
-      "../src/products/filters/http.filter.ts",
-      "../src/products/filters/validation.exception.ts",
-      "../src/products/filters/validation.filter.ts",
-      "../src/poruducts/filters/validation.filter.ts",
-      "../src/products/product.models.ts",
-      "../src/products/products.controller.ts",
-      "../src/products/products.service.ts",
-      "../src/products/pipes.ts/toint.pipe.ts",
-      "../src/main.ts",
-      "../src/products/products.module.ts"
+      "../src/users/users.module.ts"
     ]
   },
   "version": "3.8.3"

@@ -1,3 +1,4 @@
+import { CreateProductDto } from './dto/create-product.dto';
 import {Product} from './product.models'
 import {Injectable, NotFoundException} from '@nestjs/common'
 import {InjectModel} from '@nestjs/mongoose';
@@ -7,17 +8,17 @@ import {Model} from 'mongoose'
 export class ProductsService{
     private products: Product[]=[];
     constructor(
-    @InjectModel('Product')private readonly productModel:Model<Product>
+    @InjectModel('Product') private readonly productModel:Model<Product>
     ){}
 
-    async insertProduct(product:Partial<Product>):Promise<Product>{
+    async insertProduct(product:CreateProductDto):Promise<Product>{
         const newProd=await this.productModel.create(product);
         await newProd.save();
         return newProd.toObject();
     }
 
     async getProducts():Promise<Product[]>{
-        return this.productModel.find({_v:0}).exec();
+        return this.productModel.find().exec();
        
     }
 
@@ -48,8 +49,4 @@ export class ProductsService{
         };
         return product;
     }
-
-    // async findProductsByUser(userId):Promise<Product[]>{
-    //      return this.productModel.find({creator:userId})
-    // }
 }

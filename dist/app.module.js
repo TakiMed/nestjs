@@ -12,7 +12,7 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const users_module_1 = require("./users/users.module");
 const constants_1 = require("./constants");
-const products_module_1 = require("./poruducts/products.module");
+const products_module_1 = require("./products/products.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
