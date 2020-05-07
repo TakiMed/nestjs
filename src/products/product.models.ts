@@ -10,24 +10,11 @@ export const ProductSchema= new mongoose.Schema({
 });
 
 export class Product extends mongoose.Document{
-  @IsMongoId() 
   _id:string;
-  
-  @IsString()
   title:string;
-
-  @IsString()
-  @Length(3,100)
   description:string;
-
-  @IsNumber()
   price:number;
-
-  @IsInt()
-  @Min(0)
-  @Max(20)
   quantity:number;
-  
   creator:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'User'

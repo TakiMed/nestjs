@@ -8,13 +8,12 @@ import { ApiAcceptedResponse, ApiCreatedResponse, ApiBody, ApiTags } from '@nest
 @Controller("users")
 export class UsersController{
     constructor(private readonly userService:UsersService){}
-    ////////poraditi na error hendlingu za users!!!!!!!!!!!!!!!!!!!
     @Post()
     @ApiCreatedResponse({description:'User registration'})
     @ApiBody({type:CreateUserDto})
     async addUser(
-        @Body() user:CreateUserDto):Promise<User>{
-        return await this.userService.insertUser(user);
+        @Body() user:CreateUserDto):Promise<void>{
+        return await this.userService.signUp(user);
     }
     @Get()
     async getAllUsers(): Promise<User[]> {

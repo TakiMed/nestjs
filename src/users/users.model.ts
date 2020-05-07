@@ -8,24 +8,18 @@ export const UserSchema= new mongoose.Schema({
     username:{type :String, required:true},
     password:{type :String, required:true},
     role:{type:UserRole, required:true},
+    passwordHash:{type:String},
 });
 export class User extends mongoose.Document{
-    @IsMongoId()
     _id:string;
-    
-    @IsString()
-    @Length(5,15)
-    @ApiProperty({type:String, description:'username'})
+
     username:string;
     
-
-    @IsString()
-    @ApiProperty({type:String, description:'password'})
     password:string;
-    
-    @IsIn([UserRole.ADMIN,UserRole.USER])
-    
+
     role:UserRole;
+
+    passwordHash:string;
 }
 
 module.exports=mongoose.model('User',UserSchema);

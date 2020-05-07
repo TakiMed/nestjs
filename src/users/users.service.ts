@@ -17,10 +17,11 @@ export class UsersService {
     async getAllUsers():Promise<User[]>{
         return this.userModel.find()
     }
-    async insertUser(user:CreateUserDto):Promise<User>{
+    
+    async signUp(user:CreateUserDto):Promise<void>{
         const newUser=await this.userModel.create(user);
         await newUser.save();
-        return newUser.toObject();
+        
     }
 
     async findByUsername(username:string):Promise<User>{
