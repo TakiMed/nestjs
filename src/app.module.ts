@@ -19,6 +19,8 @@ import { AuthModule } from './auth/auth.module';
       ],
       useFactory: async (configService: ConfigService) => ({
         uri: configService.get<string>('MONGODB_URL'),
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
       }),
       inject: [ConfigService],
     }), 

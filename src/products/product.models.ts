@@ -16,7 +16,7 @@ export class Product extends mongoose.Document{
   price:number;
   quantity:number;
   creator:{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.Schema.Types.String,
     ref:'User'
   }
 }

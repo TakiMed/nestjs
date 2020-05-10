@@ -6,18 +6,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
+const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const users_module_1 = require("./users/users.module");
-const constants_1 = require("./constants");
+const config_1 = require("@nestjs/config");
 const products_module_1 = require("./products/products.module");
+const config_2 = require("@nestjs/config");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
-        imports: [mongoose_1.MongooseModule.forRoot(constants_1.MONGO_URL), products_module_1.ProductsModule, users_module_1.UsersModule],
+        imports: [
+            mongoose_1.MongooseModule.forRootAsync({
+                imports: [
+                    config_1.ConfigModule.forRoot({
+                        envFilePath: '.env',
+                    }),
+                ],
+                useFactory: async (configService) => ({
+                    uri: configService.get('MONGODB_URL'),
+                }),
+                inject: [config_2.ConfigService],
+            }),
+            products_module_1.ProductsModule,
+            users_module_1.UsersModule,
+            auth_module_1.AuthModule
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

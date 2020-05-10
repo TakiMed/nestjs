@@ -15,15 +15,21 @@ async function bootstrap() {
   app.setGlobalPrefix('api')
   //swagger products setup
   const prodOptions=new DocumentBuilder()
-  .setTitle('Products api').
-  setDescription('Test products').
-  setVersion('1.0').
-  build();
+  .setTitle('Products api')
+  .setDescription('Test products')
+  .setVersion('1.0')
+  .addBearerAuth(
+      { type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'jwt'},'jwt',
+  )
+  .build();
+  /*
   const prodDocument=SwaggerModule.createDocument(app,prodOptions,{
     include:[ProductsModule]
   });
   SwaggerModule.setup('api/products', app, prodDocument)
-  
+  */
   //swagger for users setup
   const uOptions=new DocumentBuilder()
   .setTitle('Users api')
@@ -41,6 +47,7 @@ async function bootstrap() {
     new HttpExceptionFilter(),
     new ValidationFilter()
   );
+
   app.useGlobalPipes(new ValidationPipe({
     skipMissingProperties:true,
     exceptionFactory:(errors:ValidationError[])=>{
@@ -49,7 +56,6 @@ async function bootstrap() {
         ${Object.values(error.constraints).join(', ')}`
       )
       return new ValidationException(messages);
-
     }
   })
   );

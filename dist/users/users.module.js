@@ -21,7 +21,8 @@ UsersModule = __decorate([
             ]),
         ],
         controllers: [users_controller_1.UsersController],
-        providers: [users_service_1.UsersService]
+        providers: [users_service_1.UsersService],
+        exports: [users_service_1.UsersService]
     })
 ], UsersModule);
 exports.UsersModule = UsersModule;
