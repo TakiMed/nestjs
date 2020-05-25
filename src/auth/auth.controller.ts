@@ -1,14 +1,18 @@
+import { UsersService } from './../users/users.service';
+import { sendEmail } from './../mailer';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './../users/dto/create-user.dto';
-import { Controller, Post, Body, UnauthorizedException, UseGuards, Req } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { GetUserId } from './get-user.decorator';
+import { Controller, Post, Body, UnauthorizedException, UseGuards, Req, Get, Delete } from '@nestjs/common';
+import { AuthGuard, PassportModule } from '@nestjs/passport';
+import { GetUser } from './get-user.decorator';
+import { ApiTags, ApiBody, ApiBearerAuth } from '@nestjs/swagger';
 
-
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
     constructor (
         private authService:AuthService,
+        private usersService:UsersService
     ){}
 
     @Post('/signup')
@@ -20,10 +24,9 @@ export class AuthController {
     signIn(@Body() createUserDto:CreateUserDto): Promise<{ accessToken: string }>{
         return this.authService.signIn(createUserDto);
     }
-    
-    @Post('/test')
-    @UseGuards(AuthGuard())
-    test(@GetUserId() user:any){
-        console.log(user);
+
+    @Get('/test')
+    async test(){
+
     }
 }

@@ -1,3 +1,4 @@
+import { PassportModule } from '@nestjs/passport';
 import { AuthModule } from './../auth/auth.module';
 import { Module, forwardRef } from '@nestjs/common';
 import { UsersController } from './users.controller';
@@ -9,7 +10,8 @@ import { UserSchema } from './users.model';
   imports:[
     MongooseModule.forFeature([
     {name:'User',schema:UserSchema}]),
-    forwardRef(() => AuthModule), 
+    PassportModule.register({ defaultStrategy:'jwt'}),
+    forwardRef(() => AuthModule),
   ],
   controllers: [UsersController],
   providers: [UsersService],

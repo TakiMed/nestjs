@@ -7,6 +7,7 @@ import {ConfigModule} from '@nestjs/config'
 import { ProductsModule } from './products/products.module';
 import {ConfigService} from '@nestjs/config'
 import { AuthModule } from './auth/auth.module';
+import { ScheduleModule } from '@nestjs/schedule'
 
 
 @Module({
@@ -21,12 +22,14 @@ import { AuthModule } from './auth/auth.module';
         uri: configService.get<string>('MONGODB_URL'),
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useFindAndModify:false,
       }),
       inject: [ConfigService],
-    }), 
-    ProductsModule, 
+    }),
+    ProductsModule,
     UsersModule,
-    AuthModule
+    AuthModule,
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],

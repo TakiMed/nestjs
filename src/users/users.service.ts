@@ -1,3 +1,4 @@
+import { GetUser } from 'src/auth/get-user.decorator';
 import { UserRole } from './user.role.enum';
 import * as bcrypt from 'bcryptjs'
 import { CreateUserDto } from './dto/create-user.dto';
@@ -7,20 +8,21 @@ import { Injectable, BadRequestException, InternalServerErrorException, Conflict
 import { InjectModel } from '@nestjs/mongoose';
 import { GetUserRole } from 'src/auth/get-user-role.decrator';
 
+
+
 @Injectable()
 export class UsersService {
-
-    constructor (@InjectModel("User")
-    
+    private users: User[]=[];
+    constructor (@InjectModel('User')
     private userModel:Model<User>
     ){}
 
-
-    async getAllUsers(@GetUserRole() role):Promise<User[]>{
-        if (role===UserRole.ADMIN){return this.userModel.find({},{__v:0})}
+    async getAllUsers(@GetUser() user):Promise<User[]>{
+        // console.log(user);
+        if (user.role===UserRole.ADMIN){return this.userModel.find({},{__v:0})}
         else {throw new BadRequestException();}
     }
-    
+
     async signUp(user:CreateUserDto):Promise<any>{
         const username = user.username;
         const existing = await this.userModel.findOne({username})
@@ -37,27 +39,28 @@ export class UsersService {
         return await bcrypt.hash(password, salt);
     }
 
-    async findByUsername(username:string, @GetUserRole() role):Promise<User>{
+    async findByUsername(username:string, role):Promise<User>{
         if (role===UserRole.ADMIN){
             return await this.userModel.findOne({username});
         }
-        else throw new UnauthorizedException;
+        else throw new UnauthorizedException('Error in find by Username');
     }
 
-    async validateUserPassword(createUserDto:CreateUserDto):Promise<string>{
-        const user = await this.userModel.findOne({username:createUserDto.username}); //iz baze
+    async validateUserPassword(createUserDto:CreateUserDto):Promise<User>{
+        const user = await this.userModel.findOne({username:createUserDto.username}); // iz baze
         const passBool = await bcrypt.compare (createUserDto.password, user.password);
         if(user && passBool) {
-            return user.username;
+            return user;
         }
         else {throw new BadRequestException('Invalid signin credentials');}
     }
 
     async restoreUsers( @GetUserRole() role ):Promise<void>{
-        if (role === UserRole.ADMIN) {await this.userModel.deleteMany({}, function (err){
-            if(err){throw new InternalServerErrorException}
+        if (role === UserRole.ADMIN) {await this.userModel.deleteMany({}, (err)=>{
+            if(err){throw new InternalServerErrorException()}
         })}
-        else throw new UnauthorizedException;
+        else throw new UnauthorizedException();
     }
+
 
 }

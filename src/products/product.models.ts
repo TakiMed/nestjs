@@ -3,7 +3,7 @@ import { IsString, Length, IsNumber, IsInt, Min, Max, IsMongoId } from 'class-va
 
 export const ProductSchema= new mongoose.Schema({
     title:{type :String, required:true},
-    description:{type :String, required:true}, //JS type
+    description:{type :String, required:true}, // JS type
     price:{type :Number, required:true},
     quantity:{type :Number, required:true},
     creator:{type:mongoose.Schema.Types.ObjectId, ref:'User'}
@@ -23,4 +23,8 @@ export class Product extends mongoose.Document{
 
 module.exports=mongoose.model('Product',ProductSchema);
 
-
+export class Salary {
+  title:string;
+  quantity:number;
+  // time:datetime;
+}

@@ -1,7 +1,9 @@
 import { User } from './../users/users.model';
-import { createParamDecorator, ExecutionContext } from "@nestjs/common";
+import { createParamDecorator, ExecutionContext, BadRequestException } from '@nestjs/common';
 
-export const GetUserId = createParamDecorator(async (data, ctx:ExecutionContext): Promise<any> =>{
+export const GetUser = createParamDecorator(async (data, ctx:ExecutionContext): Promise<any> =>{
     const req=ctx.switchToHttp().getRequest();
-    return await req.user._id;
+    // console.log(req);
+    if(!req.user){ throw new BadRequestException('Error getting user'); }
+    return await req.user;
 })

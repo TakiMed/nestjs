@@ -1,4 +1,4 @@
-import { ExceptionFilter, ArgumentsHost } from "@nestjs/common";
+import { ExceptionFilter, ArgumentsHost } from '@nestjs/common';
 
 export class FallbackExceptionFilter implements ExceptionFilter{
     catch(exception:any, host:ArgumentsHost){
@@ -8,8 +8,8 @@ export class FallbackExceptionFilter implements ExceptionFilter{
 
         return res.status(500).json({
             statusCode:500,
-            createdBy:"FallbackExceptionFilter",
-            errorMsg:exception.message ? exception.message:"Unexpected error ocurred" 
+            createdBy:'FallbackExceptionFilter',
+            errorMsg:exception.message ? exception.message:'Unexpected error ocurred'
         })
     }
 }

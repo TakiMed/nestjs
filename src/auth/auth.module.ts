@@ -12,10 +12,11 @@ import { PassportModule} from '@nestjs/passport';
     JwtModule.register({
       secret:'TopSecretTM967683hskfsf',
       signOptions:{
-        expiresIn:3600,
+        expiresIn:'10000s',
       }
     }),
-    forwardRef(() => UsersModule)],
+    forwardRef(() => UsersModule)
+  ],
   providers: [
     AuthService,
     JwtStrategy],
