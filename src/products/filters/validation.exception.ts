@@ -1,7 +1,7 @@
 import { BadRequestException } from '@nestjs/common';
 
-export class ValidationException extends BadRequestException{
-    constructor(public validationErrors:string[] | string){
-        super();
-    }
+export class ValidationException extends BadRequestException {
+  constructor(public validationErrors: string[] | string) {
+    super();
+  }
 }

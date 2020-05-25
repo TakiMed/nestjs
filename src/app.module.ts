@@ -3,12 +3,11 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
-import {ConfigModule} from '@nestjs/config'
+import { ConfigModule } from '@nestjs/config';
 import { ProductsModule } from './products/products.module';
-import {ConfigService} from '@nestjs/config'
+import { ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { ScheduleModule } from '@nestjs/schedule'
-
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -22,7 +21,7 @@ import { ScheduleModule } from '@nestjs/schedule'
         uri: configService.get<string>('MONGODB_URL'),
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useFindAndModify:false,
+        useFindAndModify: false,
       }),
       inject: [ConfigService],
     }),

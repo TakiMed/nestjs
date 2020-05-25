@@ -6,23 +6,23 @@ import { JwtPayload } from './jwt-payload-interface';
 
 @Injectable()
 export class AuthService {
-    constructor(
-        private usersService:UsersService,
-        private jwtService:JwtService,
-    ){}
+  constructor(
+    private usersService: UsersService,
+    private jwtService: JwtService,
+  ) {}
 
-    async signUp (createUserDto:CreateUserDto){
-        return this.usersService.signUp (createUserDto);
-    }
+  async signUp(createUserDto: CreateUserDto) {
+    return this.usersService.signUp(createUserDto);
+  }
 
-    async signIn (createUserDto:CreateUserDto): Promise<{ accessToken:string }>{
-        const user = await this.usersService.validateUserPassword (createUserDto);
-        const  payload = {
-            username:user.username,
-            password:user.password,
-            role:user.role
-        }
-        const accessToken = await this.jwtService.sign(payload);
-        return { accessToken };
-    }
+  async signIn(createUserDto: CreateUserDto): Promise<{ accessToken: string }> {
+    const user = await this.usersService.validateUserPassword(createUserDto);
+    const payload = {
+      username: user.username,
+      password: user.password,
+      role: user.role,
+    };
+    const accessToken = await this.jwtService.sign(payload);
+    return { accessToken };
+  }
 }

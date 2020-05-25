@@ -1,6 +1,5 @@
-export class FindProductDto{
+export class FindProductDto {
+  search: string;
 
-    search:string;
-
-    quantity:number;
+  quantity: number;
 }

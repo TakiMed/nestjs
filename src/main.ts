@@ -7,17 +7,15 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationFilter } from './products/filters/validation.filter';
 import { ValidationException } from './products/filters/validation.exception';
-import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ProductsModule } from './products/products.module';
-
-
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('api')
+  app.setGlobalPrefix('api');
 
   // swagger products setup
-  const prodOptions=new DocumentBuilder()
+  const prodOptions = new DocumentBuilder()
     .setTitle('API')
     .setDescription('Test products')
     .setVersion('1.0')
@@ -25,31 +23,32 @@ async function bootstrap() {
       {
         type: 'http',
         scheme: 'bearer',
-        bearerFormat: 'jwt'
-      }, 'jwt',
-  )
-  .build();
+        bearerFormat: 'jwt',
+      },
+      'jwt',
+    )
+    .build();
 
-  const document = SwaggerModule.createDocument(app,prodOptions);
+  const document = SwaggerModule.createDocument(app, prodOptions);
   SwaggerModule.setup('api', app, document);
-
 
   app.useGlobalFilters(
     new FallbackExceptionFilter(),
     new HttpExceptionFilter(),
-    new ValidationFilter()
+    new ValidationFilter(),
   );
 
-  app.useGlobalPipes(new ValidationPipe({
-    skipMissingProperties:true,
-    exceptionFactory:(errors:ValidationError[])=>{
-      const messages=errors.map(
-        error=>`${error.property} has wrong value${error.value},
-        ${Object.values(error.constraints).join(', ')}`
-      )
-      return new ValidationException(messages);
-    }
-  })
+  app.useGlobalPipes(
+    new ValidationPipe({
+      skipMissingProperties: true,
+      exceptionFactory: (errors: ValidationError[]) => {
+        const messages = errors.map(
+          error => `${error.property} has wrong value${error.value},
+        ${Object.values(error.constraints).join(', ')}`,
+        );
+        return new ValidationException(messages);
+      },
+    }),
   );
   await app.listen(3000);
 }

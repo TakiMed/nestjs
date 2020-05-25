@@ -1,33 +1,30 @@
 import { UserRole, Sector } from './user.role.enum';
 import * as mongoose from 'mongoose';
 
-export const UserSchema= new mongoose.Schema({
-    username:{type :String, required:true,unique:true},
-    password:{type :String, required:true},
-    role:{type:UserRole, required:true},
-    salt:{type:String},
-    sector:{type:Sector, required:true},
-    /*products:[{
+export const UserSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  role: { type: UserRole, required: true },
+  salt: { type: String },
+  sector: { type: Sector, required: true },
+  /*products:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Product'
       }]*/
 });
 
-export class User extends mongoose.Document{
+export class User extends mongoose.Document {
+  _id: string;
 
-    _id:string;
+  username: string;
 
-    username:string;
+  password: string;
 
-    password:string;
+  role: UserRole;
 
-    role:UserRole;
+  salt: string;
 
-    salt:string;
-
-    sector:Sector;
-
+  sector: Sector;
 }
 
-
-module.exports=mongoose.model('User',UserSchema);
+module.exports = mongoose.model('User', UserSchema);

@@ -7,18 +7,16 @@ import { Injectable } from '@nestjs/common';
 import { JwtPayload } from './jwt-payload-interface';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy){
-    constructor(
-        private userService:UsersService,
-        ){
-        super({
-            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey:'TopSecretTM967683hskfsf',
-        });
-    }
+export class JwtStrategy extends PassportStrategy(Strategy) {
+  constructor(private userService: UsersService) {
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: 'TopSecretTM967683hskfsf',
+    });
+  }
 
-    async validate(payload: JwtPayload): Promise<User> {
-        const username  = payload.username;
-        return await this.userService.findByUsername(username, UserRole.ADMIN);
-    }
+  async validate(payload: JwtPayload): Promise<User> {
+    const username = payload.username;
+    return await this.userService.findByUsername(username, UserRole.ADMIN);
+  }
 }

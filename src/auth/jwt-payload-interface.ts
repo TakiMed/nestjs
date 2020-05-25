@@ -1,11 +1,10 @@
 import { UserRole, Sector } from './../users/user.role.enum';
 export interface JwtPayload {
+  username: string;
 
-    username:string;
+  password: string;
 
-    password:string;
+  role: UserRole;
 
-    role:UserRole;
-
-    sector:Sector;
+  sector: Sector;
 }

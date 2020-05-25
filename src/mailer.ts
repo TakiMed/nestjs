@@ -1,17 +1,15 @@
 import * as nodemailer from 'nodemailer';
 import * as fs from 'fs';
 
-export const sendEmail=async () => {
-
+export const sendEmail = async () => {
   const transporter = nodemailer.createTransport({
     service: 'gmail', // hostname
     secure: true, // TLS requires secureConnection to be false
     port: 465, // port for secure SMTP
     auth: {
       user: process.env.EMAIL, // generated ethereal user
-      pass: process.env.EMAIL_PASS // generated ethereal password
+      pass: process.env.EMAIL_PASS, // generated ethereal password
     },
-
   });
 
   const mailOptions = {
@@ -23,8 +21,8 @@ export const sendEmail=async () => {
       {
         filename: 'myreport.csv',
         content: fs.createReadStream('file.csv'),
-      }
-    ]
+      },
+    ],
   };
 
   try {
@@ -32,5 +30,4 @@ export const sendEmail=async () => {
   } catch (errorko) {
     console.error('ERRRRRORRRRRRRR', errorko);
   }
-
-}
+};
