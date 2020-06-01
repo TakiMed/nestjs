@@ -1,13 +1,5 @@
+import { Sector } from './../users/user.role.enum';
 import * as mongoose from 'mongoose';
-import {
-  IsString,
-  Length,
-  IsNumber,
-  IsInt,
-  Min,
-  Max,
-  IsMongoId,
-} from 'class-validator';
 
 export const ProductSchema = new mongoose.Schema({
   title: { type: String, required: true },
@@ -15,6 +7,7 @@ export const ProductSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   quantity: { type: Number, required: true },
   creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  sector: { type: Sector }
 });
 
 export class Product extends mongoose.Document {
@@ -27,12 +20,7 @@ export class Product extends mongoose.Document {
     type: mongoose.Schema.Types.String;
     ref: 'User';
   };
+  sector:Sector;
 }
 
 module.exports = mongoose.model('Product', ProductSchema);
-
-export class Salary {
-  title: string;
-  quantity: number;
-  // time:datetime;
-}

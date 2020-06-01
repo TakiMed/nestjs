@@ -1,3 +1,4 @@
+import { Sector } from './../../users/user.role.enum';
 import {
   IsString,
   Length,
@@ -27,4 +28,5 @@ export class CreateProductDto {
   @Min(0)
   @ApiProperty({ type: Number, description: 'quantity' })
   quantity: number;
+
 }

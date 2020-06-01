@@ -8,6 +8,8 @@ import { ProductsModule } from './products/products.module';
 import { ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { SalesModule } from './sales/sales.module';
+import { User } from './users/users.model';
 
 @Module({
   imports: [
@@ -29,8 +31,9 @@ import { ScheduleModule } from '@nestjs/schedule';
     UsersModule,
     AuthModule,
     ScheduleModule.forRoot(),
+    SalesModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {}

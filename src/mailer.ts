@@ -16,11 +16,15 @@ export const sendEmail = async () => {
     from: 'testninalogdts@gmail.com', // sender address
     to: 'testninalogdts@gmail.com', // list of receivers
     subject: 'Products report', // Subject line
-    html: '<p>Find here attached report</p>', // plain text body
+    html: '<p>Dear Miss/Mr/Mdm</p><p>Please find here attached daily reports from ProducstAPI</p>', // plain text body
     attachments: [
       {
-        filename: 'myreport.csv',
-        content: fs.createReadStream('file.csv'),
+        filename: 'products.csv',
+        content: fs.createReadStream('products.csv'),
+      },
+      {
+        filename: 'dailysales.csv',
+        content: fs.createReadStream('dailysales.csv'),
       },
     ],
   };

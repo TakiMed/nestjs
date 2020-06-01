@@ -27,4 +27,4 @@ export class User extends mongoose.Document {
   sector: Sector;
 }
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports  =  mongoose.model('User', UserSchema);

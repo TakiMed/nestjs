@@ -1,3 +1,4 @@
+import { SalesService } from './../sales/sales.service';
 import { SellOrBuyDTO } from './dto/sell-and-buy-dto';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -35,7 +36,10 @@ import { FindProductDto } from './dto/find-prod-dto';
 @UseGuards(AuthGuard())
 @ApiBearerAuth('jwt')
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(private readonly productsService: ProductsService,
+              private readonly salesService: SalesService) {}
+
+
   @Post()
   @ApiBody({ type: CreateProductDto })
   async addProduct(
@@ -43,6 +47,11 @@ export class ProductsController {
     @GetUser() user,
   ): Promise<Product> {
     return await this.productsService.insertProduct(product, user._id);
+  }
+
+  @Get('stock')
+  async getAmount(){
+    return this.productsService.myStock();
   }
 
   @Get()
@@ -60,10 +69,11 @@ export class ProductsController {
   }
 
   @Get(':id')
-  async getProduct(@Param('id') prodId: string, @GetUser() user) {
+  async getProduct(@Param('id') prodId: string, @GetUser() user): Promise<Product> {
     const product = await this.productsService.getSingleProduct(prodId, user);
     return product;
   }
+
 
   @Patch(':id')
   @ApiBody({ type: CreateProductDto })
@@ -82,17 +92,18 @@ export class ProductsController {
 
   @Patch('sell/:id')
   @ApiBody({ type: SellOrBuyDTO })
-  async buy(
+  async sell(
     @Param('id') prodId: string,
     @Body('quantity') newQuan: number,
+    @GetUser() user
   ): Promise<Product> {
-    const res = await this.productsService.buy(prodId, newQuan);
+    const res = await this.productsService.sell(prodId, newQuan, user);
     return res;
   }
 
   @Patch('buy/:id')
   @ApiBody({ type: SellOrBuyDTO })
-  async sell(
+  async buy(
     @Param('id') prodId: string,
     @Body('quantity') newQuan: number,
   ): Promise<Product> {

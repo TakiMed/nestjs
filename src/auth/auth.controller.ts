@@ -1,3 +1,5 @@
+
+import { SignInDto } from './../users/dto/signIn-dto';
 import { UsersService } from './../users/users.service';
 import { sendEmail } from './../mailer';
 import { AuthService } from './auth.service';
@@ -16,6 +18,8 @@ import { AuthGuard, PassportModule } from '@nestjs/passport';
 import { GetUser } from './get-user.decorator';
 import { ApiTags, ApiBody, ApiBearerAuth } from '@nestjs/swagger';
 
+
+
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
@@ -31,11 +35,14 @@ export class AuthController {
 
   @Post('/signin')
   signIn(
-    @Body() createUserDto: CreateUserDto,
+    @Body() signInDto: SignInDto,
   ): Promise<{ accessToken: string }> {
-    return this.authService.signIn(createUserDto);
+    return this.authService.signIn(signInDto);
   }
 
   @Get('/test')
-  async test() {}
+  async test() {
+    const res= await mig();
+    console.log(res);
+  }
 }

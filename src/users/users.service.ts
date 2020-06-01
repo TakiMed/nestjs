@@ -1,3 +1,4 @@
+import { SignInDto } from './dto/signIn-dto';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { UserRole } from './user.role.enum';
 import * as bcrypt from 'bcryptjs';
@@ -53,12 +54,12 @@ export class UsersService {
     } else throw new UnauthorizedException('Error in find by Username');
   }
 
-  async validateUserPassword(createUserDto: CreateUserDto): Promise<User> {
+  async validateUserPassword(signInDto: SignInDto): Promise<User> {
     const user = await this.userModel.findOne({
-      username: createUserDto.username,
+      username: signInDto.username,
     }); // iz baze
     const passBool = await bcrypt.compare(
-      createUserDto.password,
+      signInDto.password,
       user.password,
     );
     if (user && passBool) {

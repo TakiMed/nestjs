@@ -1,3 +1,4 @@
+import { SignInDto } from './../users/dto/signIn-dto';
 import { CreateUserDto } from './../users/dto/create-user.dto';
 import { UsersService } from './../users/users.service';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
@@ -15,8 +16,8 @@ export class AuthService {
     return this.usersService.signUp(createUserDto);
   }
 
-  async signIn(createUserDto: CreateUserDto): Promise<{ accessToken: string }> {
-    const user = await this.usersService.validateUserPassword(createUserDto);
+  async signIn(signInDto: SignInDto): Promise<{ accessToken: string }> {
+    const user = await this.usersService.validateUserPassword(signInDto);
     const payload = {
       username: user.username,
       password: user.password,

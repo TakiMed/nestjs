@@ -1,7 +1,8 @@
+import { SalesService } from './../sales/sales.service';
 import { FindProductDto } from './dto/find-prod-dto';
 import { SellOrBuyDTO } from './dto/sell-and-buy-dto';
 import { sendEmail } from './../mailer';
-import { UserRole } from './../users/user.role.enum';
+import { UserRole, Sector } from './../users/user.role.enum';
 import { Cron } from '@nestjs/schedule';
 import { User } from './../users/users.model';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -27,6 +28,7 @@ export class ProductsService {
   constructor(
     @InjectModel('Product') private readonly productModel: Model<Product>,
     @InjectModel('User') private readonly userModel: Model<User>,
+    private salesService: SalesService,
   ) {}
 
   async insertProduct(
@@ -40,20 +42,20 @@ export class ProductsService {
       const newProd = await this.productModel.create(product);
       newProd.creator = user._id;
       await newProd.save();
-      this.dataToCSV(newProd);
       return newProd;
     }
   }
 
   async getProducts(@GetUser() user): Promise<Product[]> {
-    const userId = user._id;
+    const sector = user.sector;
     const role = user.role;
     const data =
       role === UserRole.USER
-        ? await this.productModel.find({ creator: userId }, { __v: 0 }).exec()
+        ? await this.productModel.find({ sector }, { __v: 0 }).exec()
         : await this.productModel.find({}, { __v: 0 }).exec();
 
-    await this.dataToCSV(data);
+    await this.dataToCSV(data,'products');
+    // console.log();
     return data;
   }
 
@@ -77,36 +79,33 @@ export class ProductsService {
   }
 
   async getSingleProduct(prodId: string, @GetUser() user): Promise<any> {
-    const userId = user._id;
+    const sector = user.sector;
     const role = user.role;
-    try {
-      if (role === UserRole.USER) {
-        return await this.productModel.find({ _id: prodId, creator: userId });
-      } else {
-        return await this.productModel.findOne({ _id: prodId });
-      }
-    } catch (error) {
-      throw new NotFoundException('No such product here');
+    const res = role === UserRole.USER
+        ? await this.productModel.find({ _id: prodId, sector })
+        : await this.productModel.findOne({ _id: prodId });
+    if(!res) throw new NotFoundException('No such product here');
+    return res;
     }
-  }
 
   async updateProduct(
     prodId: string,
     changes: Product,
     @GetUser() user,
   ): Promise<Product> {
-    const userId = user._id;
+    const sector = user.sector;
     const role = user.role;
     const updatedProduct =
       role === UserRole.USER
         ? await this.productModel.findOneAndUpdate(
-            { _id: prodId, creator: userId },
+            { _id: prodId, sector },
             changes,
             { new: true },
           )
         : await this.productModel.findByIdAndUpdate(prodId, changes, {
             new: true,
           });
+    if(!updatedProduct) throw new BadRequestException('Product not found');
     return updatedProduct;
   }
 
@@ -123,12 +122,13 @@ export class ProductsService {
     }
   }
 
-  async sell(prodId: string, quant: number): Promise<Product> {
+  async sell(prodId: string, quant: number, @GetUser() user): Promise<Product> {
     const prod = await this.productModel.findOne({ _id: prodId });
     const newQuan = prod.quantity - quant;
     if (newQuan >= 0) {
-      await prod.update({ quantity: newQuan });
+      await prod.updateOne({ quantity: newQuan }, { new: true});
       prod.save();
+      const sale = await this.salesService.insertSale(prodId,quant, user)
       return prod;
     } else {
       throw new BadRequestException('You exceeded quantity in stock');
@@ -143,26 +143,18 @@ export class ProductsService {
     return prod;
   }
 
-  async dataToCSV(data) {
-    const fields = [
-      '_id',
-      'title',
-      'description',
-      'price',
-      'quantity',
-      'creator',
-    ];
+  async dataToCSV(data,filename) {
+    // console.log(data[0].keys());
+    const fields = Object.keys(data[0].schema.paths);
     const csvParser = new json2csv.Parser({ fields });
     const csv = await csvParser.parse(data);
-    fs.writeFile('file.csv', csv, err => {
-      if (err)
+    fs.writeFile(`${filename}.csv`, csv, err => {
+      if (err) {
         throw new InternalServerErrorException('Failed converting to csv');
+      }
     });
   }
 
-  async sayHi() {
-    console.log('HI');
-  }
   async myStock(): Promise<any> {
     const res = await this.productModel
       .aggregate([
@@ -174,12 +166,19 @@ export class ProductsService {
         },
       ])
       .exec();
-    console.log(res);
-    return res;
+    return res.map((element) => {
+        return {
+            title: element._id,
+            totalAmount: element.totalAmount,
+        };
+    });
   }
 
-  @Cron('0 41 17 * * *')
-  handleCron() {
+  @Cron('0 2 * * * *')
+  async handleCron() {
+    const prodData = await this.getProducts({sector:'MAN',role:'ADMIN'});
+    const salesData = await this.salesService.getDailySales({sector:'MAN'});
+    await this.dataToCSV(salesData,'dailysales');
     sendEmail();
     console.log('mail sent');
   }
