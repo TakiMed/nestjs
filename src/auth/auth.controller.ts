@@ -42,7 +42,7 @@ export class AuthController {
 
   @Get('/test')
   async test() {
-    const res= await mig();
-    console.log(res);
+    // const res= await mig();
+    // console.log(res);
   }
 }

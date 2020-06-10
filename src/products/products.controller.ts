@@ -49,6 +49,11 @@ export class ProductsController {
     return await this.productsService.insertProduct(product, user._id);
   }
 
+  @Post('/migrations')
+  async migrate(){
+    return await this.productsService.manualMigrations();
+  }
+
   @Get('stock')
   async getAmount(){
     return this.productsService.myStock();

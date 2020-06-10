@@ -1,13 +1,8 @@
-import { ProductsService } from './../products/products.service';
-import { User } from './../users/users.model';
-import { Sector } from './../users/user.role.enum';
 import { InjectModel } from '@nestjs/mongoose';
-import { GetUser } from 'src/auth/get-user.decorator';
 import { Sale } from './sale.model';
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { Product } from 'src/products/product.models';
-import { Cron } from '@nestjs/schedule';
 
 
 @Injectable()
@@ -40,14 +35,18 @@ export class SalesService {
 
     async getDailySales(user){
       const sales = await this.getAllSales(user);
-      const today = new Date().getTime()
-      const yesterday = new Date(today-86400000)
+      const today = new Date().getTime();
+      const yesterday = new Date(today-86400000);
       const filtered = sales.filter( sale => sale.date > yesterday)
       // await this.productsService.dataToCSV(filtered,'daliysales');
       return filtered;
     }
 
-
+    async sellProducts(){
+      const prods = await this.productModel.find({});
+      prods.forEach((prod)=>this.insertSale(prod._id,5,{sector:prod.sector}));
+      return 'PRODUCTS SOLD';
+    }
 }
 
 

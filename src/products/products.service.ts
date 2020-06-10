@@ -1,3 +1,4 @@
+import { PRODUCTS } from './add.products';
 import { SalesService } from './../sales/sales.service';
 import { FindProductDto } from './dto/find-prod-dto';
 import { SellOrBuyDTO } from './dto/sell-and-buy-dto';
@@ -41,9 +42,15 @@ export class ProductsService {
     } else {
       const newProd = await this.productModel.create(product);
       newProd.creator = user._id;
+      newProd.sector = user.sector;
       await newProd.save();
       return newProd;
     }
+  }
+
+  async manualMigrations(): Promise<string> {
+    await this.productModel.insertMany(PRODUCTS);
+    return 'PRODUCTS ADDED';
   }
 
   async getProducts(@GetUser() user): Promise<Product[]> {
@@ -124,15 +131,18 @@ export class ProductsService {
 
   async sell(prodId: string, quant: number, @GetUser() user): Promise<Product> {
     const prod = await this.productModel.findOne({ _id: prodId });
-    const newQuan = prod.quantity - quant;
-    if (newQuan >= 0) {
-      await prod.updateOne({ quantity: newQuan }, { new: true});
-      prod.save();
-      const sale = await this.salesService.insertSale(prodId,quant, user)
-      return prod;
+    if(prod.sector===user.sector || user.role==='ADMIN'){
+      const newQuan = prod.quantity - quant;
+      if (newQuan >= 0) {
+        await prod.updateOne({ quantity: newQuan }, { new: true});
+        prod.save();
+        const sale = await this.salesService.insertSale(prod._id,quant, user)
+        return this.productModel.findOne({ _id: prodId });
     } else {
       throw new BadRequestException('You exceeded quantity in stock');
     }
+    }
+    else { throw new BadRequestException('Unauthorized request');}
   }
 
   async buy(prodId: string, quant: number): Promise<Product> {
@@ -140,7 +150,7 @@ export class ProductsService {
     const newQuan = prod.quantity + quant;
     await prod.update({ quantity: newQuan });
     prod.save();
-    return prod;
+    return this.productModel.findById({prodId});
   }
 
   async dataToCSV(data,filename) {
@@ -174,7 +184,7 @@ export class ProductsService {
     });
   }
 
-  @Cron('0 2 * * * *')
+  @Cron('0 55 * * * *')
   async handleCron() {
     const prodData = await this.getProducts({sector:'MAN',role:'ADMIN'});
     const salesData = await this.salesService.getDailySales({sector:'MAN'});

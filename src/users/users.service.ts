@@ -1,3 +1,4 @@
+import { USERS } from './add.users';
 import { SignInDto } from './dto/signIn-dto';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { UserRole } from './user.role.enum';
@@ -77,5 +78,15 @@ export class UsersService {
         }
       });
     } else throw new UnauthorizedException();
+  }
+
+  async manualMigrations(): Promise<string> {
+    const users = USERS.map((user) => {
+      user.salt = bcrypt.genSaltSync();
+      user.password = bcrypt.hashSync(user.password, user.salt);
+      return user;
+    })
+    await this.userModel.insertMany(users);
+    return 'USERS ADDED';
   }
 }
